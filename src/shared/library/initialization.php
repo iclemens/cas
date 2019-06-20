@@ -33,15 +33,8 @@
 	
 		$configFilename = $dataPath . "/config/config.xml";
 	
-		// Make sure none of the incoming variables are escaped automatically
-		@include_once 'gpc.php';
 		@include_once 'utility.php';
 		@include_once 'initialization.php';
-	
-		if(!function_exists('disable_magic_quotes'))
-			throw new Exception("Kan gpc.php niet laden.");
-	
-		disable_magic_quotes();
 	
 		if(!function_exists("simplexml_load_file"))
 			throw new Exception("Kan de SimpleXML module niet vinden.");
