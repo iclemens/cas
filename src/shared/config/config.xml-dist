@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<config>
+	
+	<!--
+		Citrus-IT Administratie Systeem
+		Use :set ts=2
+			-->
+	
+	<production>
+		
+		<!--
+			Point this to your local smarty directory!
+			-->
+		<libraries>
+			<smarty>/usr/share/php/smarty/</smarty>
+		</libraries>
+
+		<branding>
+			<application_name>Citrus-IT Administratie Systeem</application_name>
+			<application_abbr>CAS</application_abbr>
+			<company_name>Citrus-IT</company_name>
+			<company_email>holding@ivarclemens.nl</company_email>
+			<company_telephone>+31 6 12345678</company_telephone>
+			<default_stylesheet>blue</default_stylesheet>
+
+			<!-- The module used to generate invoice references &c. -->
+			<formatter>Generic</formatter>
+		</branding>			
+			
+		<!-- 
+			Database configuratie
+			Let op: Deze gegevens worden door de unittests
+				gebruikt. De opgegeven database wordt dan
+				geleegd. Zet productie server data in de
+				production sectie!
+				-->
+		<database>
+			<type>pdo_mysql</type>
+			<host>localhost</host>
+			<username></username>
+			<password></password>
+			<name></name>
+		</database>		
+
+		<!--
+			iDEAL Configuratie
+				-->
+		<ideal>
+			<post_address>https://idealtest.rabobank.nl/ideal/mpiPayInitRabo.do</post_address>
+			<merchant_id></merchant_id>
+			<key></key>
+		</ideal>
+
+		<clieop>
+			<account></account>
+		</clieop>
+		
+		<mailer>
+			<server></server>
+			<username></username>
+			<password></password>
+
+			<return_path>mail@example.com</return_path>
+			<from_address>Citrus-IT &lt;mail@example.com&gt;</from_address>
+			<copy_to>Citrus-IT &lt;mail@example.com&gt;</copy_to>
+			<method>mail</method>
+		</mailer>
+
+		<invoice>
+			<location>facturen</location>
+			<generator>Generic</generator>
+
+			<default_template>generic_nl.tex</default_template>
+
+			<payment_due_delta>31</payment_due_delta>
+		</invoice>
+
+		<customer>
+			<first_business_id>60001</first_business_id>
+			<first_private_id>65000</first_private_id>
+		</customer>
+
+		<payment>
+			<options>Overboeking</options>
+		</payment>
+
+		<web_root>http://localhost</web_root>
+		<rewrite_base></rewrite_base>		
+		
+		<temp_dir>tmp</temp_dir>
+
+		<log_file>tmp/cas.log</log_file>
+
+		<templates>templates</templates>
+		<templates_compile_dir>tmp</templates_compile_dir>
+
+	</production>
+	
+</config>

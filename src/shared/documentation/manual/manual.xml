@@ -1,0 +1,264 @@
+<?xml version='1.0'?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+               "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book id="manual" lang="nl">
+
+<chapter><title>Installatie</title>
+
+<para>Hoewel het installeren van Project CAS steeds eenvoudiger wordt, zijn een
+aantal handelingen nogsteeds noodzakelijk.</para>
+
+<section><title>Systeem vereisten</title>
+
+<para>Om Project CAS te kunnen installeren moet aan diverse randvoorwaarden 
+voldaan zijn. Zowel PHP 5, MySQL 5 als de Apache webserver zijn vereist. Om
+facturen te genereren middels LaTeX moet ook TeX aanwezig zijn op de server.</para>
+
+
+<section><title>PHP</title>
+
+<para>Ten aanzien van de PHP installatie zijn de volgende onderdelen vereist:</para>
+
+<itemizedlist>
+<listitem><para><ulink url="http://us2.php.net/pdo"><citetitle>PHP Data Objects</citetitle></ulink> (PDO) including the MySQL driver (meer info...)</para></listitem> 
+<listitem><para><ulink url="http://us2.php.net/simplexml"><citetitle>SimpleXML</citetitle></ulink>*</para></listitem> 
+<listitem><para><ulink url="http://us2.php.net/xml"><citetitle>XML</citetitle></ulink>**</para></listitem>
+</itemizedlist>
+ 
+<para>Het is afhankelijk van uw distributie of deze componenten zijn meegeleverd.
+Indien u gentoo linux gebruikt zijn de volgende use-flags voldoende: 
+USE="pdo simplexml xml". In oudere debian versies moet naast het php package ook pdo 
+geinstalleerd worden, dit kan met het commando: "pecl install pdo_mysql".</para> 
+
+</section>
+
+
+<section><title>Apache</title>
+
+<para>Project CAS maakt extensief gebruik van mod_rewrite 
+om de URLs binnen het systeem een mooi uiterlijk te geven. 
+iervoor zijn echter enkele niet-standaard opties vereist
+binnen apache. Systemen zonder mod_rewrite worden op dit
+moment niet ondersteund.</para>
+
+<para>In uw apache configuratie dienen tenminste de volgende opties 
+ingeschakeld te zijn:
+
+<code>LoadModule rewrite_module modules/mod_rewrite.so 
+AllowOverride Authconfig 
+AllowOverride FileInfo</code></para>
+
+</section>
+
+
+<section><title>LaTeX</title>
+
+<para>Om printbare facturen te genereren gebruikt Project CAS
+een modulair systeem. Op dit moment is alleen een LaTeX module
+beschikbaar, waardoor ook LaTeX een vereiste is.</para>
+
+<para>Naast LaTeX zijn ook enkele LaTeX-uitbreidingen nodig, onder debian
+kunt u het commando <command>apt-get install tetex-extra</command>
+gebruiken om deze te installeren.</para>
+
+</section>
+
+</section>
+
+
+<section><title>Downloaden en uitpakken</title>
+
+<para>Naast de standaard op FTP gebaseerde installatie, kunt u Project CAS
+ook direct op de webserver installeren. Hiervoor heeft u wel shell toegang en
+enige technische kennis nodig.</para>
+
+<section><title>Installatie via FTP</title>
+
+<para>Download de laatste versie van de Project CAS <ulink url="http://project-cas.ivarclemens.nl/download.html">website</ulink>.
+Pak het bestand uit met bijvoorbeeld <ulink url="http://www.7-zip.org/">7-zip</ulink> en gebruik uw FTP programma 
+om de map <filename>cas/shared/htdocs</filename> op een vanuit het web toegangkelijke plaats te zetten.</para>
+
+<para>De rest van de map <filename>cas</filename> dient nu op een niet publiek toegangkelijke plaats gezet te worden omdat
+deze gebruikt gaat worden voor het opslaan van wachtwoorden en facturen. Noteer het complete pad
+(bijvoorbeeld /hosting/home/gebruiker/cas), deze informatie heeft u later nodig.</para>
+
+</section>  
+
+<section><title>Installatie via shell</title>
+
+<para>Download de laatste versie van Project CAS en pak dit bestand uit:
+<command>wget http://project-cas.ivarclemens.nl/download/cas-latest.tar.bz2
+tar -jxvf cas-latest.tar.bz2</command>
+</para>
+
+<para>Verplaats eerst de zojuist gemaakte map <filename>cas/shared/htdocs</filename>
+naar een vanuit het web te benaderen lokatie. De rest van map <filename>cas</filename>
+verplaatst u naar een niet publiek toegangkelijke plek. Noteer de lokatie waar u de map
+cas plaatst, deze informatie heeft u later nodig.</para>
+
+</section>
+
+</section>
+
+
+<section><title>Configureren</title>
+
+<para>Start nu het installatie programma door met uw browser het publieke
+deel van Project CAS te benaderen, en achter het adres <filename>/setup.php</filename>
+te plaatsen.</para>
+
+<section><title>Lokaties instellen</title>
+
+<para>Er verschijnt nu een scherm met twee invoer velden, in het eerste veld
+typt u het pad dat u in de vorige stap heeft genoteerd, aangevuld met 
+<filename>/shared</filename>. In het tweede veld vult u het genoteerde pad aan
+met <filename>/default</filename>. Klik nu op de knop <guibutton>opslaan</guibutton>.</para>
+
+</section>
+
+<section><title>Instellen van CAS</title>
+
+<para>In het nu volgende scherm kunt u Project CAS zelf configureren. Als de
+opgegeven database niet bestaat dan wordt u later gevraagd om het wachtwoord van
+de beheerder op te geven. Zowel de database als de gebruiker worden dan aangemaakt.
+Bestaat de database wel, dan dient u zelf een gebruiker aan te maken of een reeds
+bestaande gebruiker op te geven. Vul het scherm in en druk op de knop <guibutton>opslaan</guibutton>
+om verder te gaan.</para>
+
+</section>
+
+</section>
+
+</chapter>
+
+
+
+<chapter><title>Modules</title>
+
+<section><title>Periodieke facturen</title>
+
+<para>Als de huidige maand is geselecteerd dan verschijnt een optie
+"deze maand al factureren". Deze optie zorgt ervoor dat wanneer de
+periodiekeregels worden verwerkt (door bijvoorbeeld een cron-job)
+er een regel voor de huidige maand wordt aangemaakt. Bij het gebruik
+van deze optie moet men rekening houden met twee factoren: 
+</para>
+
+<orderedlist>
+<listitem><para>De factuur-regel wordt pas op een later tijdstip
+aan de wachtrij toegevoegd. Draai eventueel het 
+<code>process-periodic-invoices.php</code>
+script handmatig om de aanmaak te forceren.</para></listitem>
+<listitem><para>De omschrijving is niet relevant, er wordt
+een regel gemaakt waarbij de <code>$maand</code> parameter
+op de huidige maand staat. </para></listitem>
+</orderedlist>
+
+<para>Het aanvinken van deze optie heeft intern tot gevolg
+dat het veld "laatst gefactureerd" op de laatste dag van de
+vorige maand komt te staan, normaal staat het veld direct nadat
+de factuur is gemaakt op de huidige datum.</para>
+
+<example><title>Deze maand al factureren</title>
+<para>
+De huidige maand is juli, er is een periodieke regel gemaakt 
+met inhoud <code>Factuur {maand nr=$maand}</code> en zowel de juli
+als augustus vinkjes zijn aangevinkt. Wanneer de regels nog in dezelfde
+maand (juli) worden verwerkt dan komt er een nieuwe regel in de wachtrij 
+met omschrijving "Factuur juli". In augustus wordt een regel met omschrijving
+"Factuur augustus" toegevoegd.
+</para>
+</example>
+
+<example><title>Deze maand al factureren - aangepaste omschrijving</title>
+<para>
+Het is januari, en er is een regel gemaakt met inhoud
+<code>Factuur {maand nr=($maand+1)}</code> en januari is aangevinkt. De eerst
+volgende keer dat de regels worden verwerkt wordt een nieuwe regel in de
+wachtrij geplaatst met de omschrijving "Factuur februari". De omschrijving is
+dus niet relevant, een regel <code>Factuur {maand nr=($maand+3)}</code> zou
+een factuur voor april (3 maanden na januari) maken.
+</para></example>
+
+</section>
+
+</chapter>
+
+
+
+<chapter><title>Miscellaneous</title>
+
+<section><title>Smarty tags</title>
+
+<para>The following smarty variables are supported:</para>
+
+<itemizedlist>
+<listitem><para><code>{$company_name}</code>: The name of the company (e.g. Happy IT)</para></listitem>
+<listitem><para><code>{$company_email}</code>: The email address of the company (e.g. mail@example.com}</para></listitem>
+<listitem><para><code>{$company_telephone}</code>: The telephone number of the company</para></listitem>
+<listitem><para><code>{$application_name}</code>: The application name in full (e.g. ProjectCAS)</para></listitem>
+<listitem><para><code>{$application_abbr}</code>: An abbreviated name for the application (e.g. CAS)</para></listitem>
+</itemizedlist>
+
+<para>The following smarty functions are supported:</para>
+
+<itemizedlist>
+<listitem><para><code>{klantnaam klant=$klant}</code>: Creates a pretty name for the customer in the $klant struct.</para></listitem>
+<listitem><para><code>{maand lang=$lang nr=$nr type=$type}</code>: Returns the name of month $nr in language $lang ('en' or 'nl'). The $type variable may be set to 'long' (e.g. January), 'short' (e.g. Jan) or 'letter' (e.g. J).</para></listitem>
+<listitem><para><code>{factuurnummer factuur=$factuur}</code>: Creates a reference number for invoice $factuur.</para></listitem>
+<listitem><para><code>{klantnummer klant=$klant}</code>: Creates a reference number for customer $klant.</para></listitem>
+<listitem><para><code>{prijs prijs=$tmp}</code>: Formats an amount of cents according to the Dutch notation.</para></listitem>
+</itemizedlist>
+
+<para>The following smarty variables are meant for internal use only:</para>
+
+<itemizedlist>
+<listitem><para><code>{$base}</code>: The CAS root as seen from the browser (e.g. http://www.ivarclemens.nl/boekhouding)</para></listitem>
+<listitem><para><code>{$default_stylesheet}</code>: The name of the stylesheet (excluding path and the .css suffix)</para></listitem>
+<listitem><para><code>{$use_icons}</code>: Determines whether the menu uses icons (value = 1) or not (value = 0).</para></listitem>
+</itemizedlist>
+
+<para>The following smarty functions are meant for internal use only:</para>
+
+<itemizedlist>
+<listitem><para><code>{html_global_error}</code></para></listitem>
+<listitem><para><code>{html_textbox}</code></para></listitem>
+<listitem><para><code>{html_file_upload}</code></para></listitem>
+<listitem><para><code>{html_error_for_field}</code></para></listitem>
+</itemizedlist>
+
+</section>
+
+<section><title>Unit tests</title>
+
+<para>
+Best practice dictates that code should be tested rigorously. Therefore, tests have been written to assess various aspects of CAS. This document describes the steps required to run these tests.
+Prerequisites</para>
+
+<itemizedlist>
+<listitem><para>Working installation of phpunit, preferably located with the scope of PHP's search path. The units tests have been confirmed to work with version 3.2.16.</para></listitem>
+<listitem><para>For code coverage analysis, xdebug should be installed. The tests have been confirmed to work with version 2.0.3. On debian the php5-xdebug package should be installed.</para></listitem>
+</itemizedlist> 
+
+<section><title>Configuration</title>
+
+<para>A development section should be created in the configuration file (config/config.xml). Note that the database specified in this section will be wiped by the tests!</para>
+
+</section>
+
+<section><title>Running</title>
+
+<para>To run the tests, do:
+
+<code>cd $CAS_SHARED/tests
+php test_runner.php</code></para>
+
+<para>If xdebug has been setup correctly, coverage analysis will be written to $CAS_SHARED/htdocs/tests/coverage.</para>
+
+</section>
+
+</section>
+
+</chapter>
+
+</book>

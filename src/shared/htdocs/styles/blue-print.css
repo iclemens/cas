@@ -1,0 +1,35 @@
+
+body {
+	background-color: #fff;
+	color: #000;
+	font-size: 0.9em;
+	font-family: sans-serif, helvetica;
+	margin: 0;
+	padding: 0;
+}
+
+th {
+	text-align: left;
+}
+
+div.menubar {
+	display: none;
+}
+
+.noprint {
+	display: none;
+}
+
+.inactive {
+	color: red;
+	background-color: #EEEEEE;
+}
+
+table.generic_table {
+	width: 80%;
+}
+
+table.generic_table tr th a {
+	color: #000000;
+	text-decoration: none;
+}

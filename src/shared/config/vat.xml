@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<vat default="hoog">
+	<category id="vrij" rate="0">Vrij</category>
+	<category id="laag" rate="9">Laag</category>
+	<category id="hoog" rate="21">Hoog</category>
+</vat>

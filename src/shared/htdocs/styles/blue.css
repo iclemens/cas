@@ -1,0 +1,203 @@
+
+body {
+	background-color: #fff;
+	color: #000;
+	font-size: 0.9em;
+	font-family: sans-serif, helvetica;
+	margin: 0;
+	padding: 0;
+}
+
+.noscreen {
+	display: none;
+}
+
+table.content-container {
+	width: 700px;
+}
+
+
+div.dropdown {
+	position: absolute;
+	font-family: tahoma;
+	font-size: 8pt;
+	background: #FFFFEE;
+	border: 1px solid #000000;
+	padding: 5px;
+	display: none;
+}
+
+
+:link {
+	color: #c00;
+}
+
+:visited {
+	color: #c00;
+}
+
+a:hover {
+	color: #f50;
+}
+
+img {
+	border: 0px solid #fff;
+	padding: 2px;
+	margin: 2px;
+}
+
+a:hover img {
+	border: 1px solid #f50;
+	padding: 1px;
+}
+
+.content {
+	padding: 1em 5em;
+}
+
+.content-columns {
+	position: relative;
+	padding-top: 1em;
+}
+
+.content-column-left {
+	width: 47%;
+	padding-right: 3%;
+	float: left;
+	padding-bottom: 2em;
+}
+
+h1 {
+	text-align: center;
+	margin: 0;
+	padding: 0.6em 2em 0.4em;
+	background-color: #22437f;
+	color: #fff;
+	font-weight: normal;
+	font-size: 1.75em;
+	border-bottom: 2px solid #000;
+}
+
+h2 {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+input.login#wachtwoord, input.login#gebruikersnaam {
+	width: 160px;
+}
+
+input {
+	border: 1px solid #000000;
+}
+
+input[readOnly] {
+	background: #EEEEEE;
+	color: #FF0000;
+}
+
+textarea {
+	border: 1px solid #000000;
+	font-family: sans-serif;
+}
+
+select {
+	border: 1px solid #000000;
+}
+
+ul.menu {
+	list-style: none; margin-left: 0px; padding-left: 0; text-indent: 0;
+}
+
+table.generic_table {
+	border: 1px solid #000000;
+	border-collapse: collapse;
+	width: 100%; /*700px;*/
+}
+
+table.generic_table tr {
+	background: #FAFAFA;
+}
+
+table.generic_table tr.inactive {
+	background: #FAF0F0;
+}
+
+table.generic_table tr:hover {
+	background: #4465A0;
+	color: #FFFFFF;
+}
+
+table.generic_table tr:hover a {
+	color: #FAF0F0;
+}
+
+table.generic_table tr th {
+	background: #22437f;
+	color: #FFFFFF;
+	border-bottom: 1px solid #000000;
+	text-align: left;
+	padding: 4px;
+}
+
+table.generic_table tr th a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+table.generic_table tr td {
+	padding: 4px;
+}
+
+div.error {
+	color: #FF0000;
+	font-size: 8pt;
+	font-family: sans-serif;
+	position: absolute;
+}
+
+div.error_rel {
+	color: #FF0000;
+	font-size: 8pt;
+	font-family: sans-serif;
+}
+
+div.errorbox {
+	font-family: sans-serif;
+	padding: 10px;
+	background-color: red;
+	color: white;
+	font-weight: bold;
+	border: 1px solid black;
+}
+
+div.infobox {
+	font-family: sans-serif;
+	padding: 10px;
+	background-color: green;
+	color: white;
+	font-weight: bold;
+	border: 1px solid black;
+}
+
+div.errorbox pre {
+	font-weight: normal;
+}
+
+div.errorbox a {
+	color: #000080;
+}
+
+/* Voorbeeld.tpl */
+table.invoicepreview {
+	border: 1px solid #AAAAAA;
+	border-collapse: collapse;
+	width: 650px;
+}
+
+table.invoicepreview td, table.invoicepreview th {
+	border: 1px solid #AAAAAA;
+	border-collapse: collapse;
+	padding: 5px;
+}
+

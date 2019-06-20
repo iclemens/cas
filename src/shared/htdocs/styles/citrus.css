@@ -1,0 +1,150 @@
+
+body {
+	background-color: #eee;
+	color: #000;
+	font-size: 0.9em;
+	font-family: sans-serif, helvetica;
+	margin: 0;
+	padding: 0;
+}
+
+:link {
+	color: #c00;
+}
+
+:visited {
+	color: #c00;
+}
+
+a:hover {
+	color: #f50;
+}
+
+img {
+	border: 0px solid #fff;
+	padding: 2px;
+	margin: 2px;
+}
+
+a:hover img {
+	border: 1px solid #f50;
+	padding: 1px;
+}
+
+.content {
+	padding: 1em 5em;
+}
+
+.content-columns {
+	position: relative;
+	padding-top: 1em;
+}
+
+.content-column-left {
+	width: 47%;
+	padding-right: 3%;
+	float: left;
+	padding-bottom: 2em;
+}
+
+h1 {
+	text-align: center;
+	margin: 0;
+	padding: 0.6em 2em 0.4em;
+	/*background-color: #22437f;*/
+	background-color: #9cbe33;
+	color: #fff;
+	font-weight: normal;
+	font-size: 1.75em;
+	border-bottom: 2px solid #000;
+}
+
+h2 {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+div.menubar {
+	border-bottom: 1px solid #000000; 
+	background-color: #e0eac0;
+}
+
+input {
+	border: 1px solid #000000;
+}
+
+input.login#wachtwoord,input.login#gebruikersnaam {
+	width: 160px;
+}
+
+textarea {
+	border: 1px solid #000000;
+}
+
+select {
+	border: 1px solid #000000;
+}
+
+table.dtable {
+	border: 1px solid #000000;
+	border-collapse: collapse;
+}
+
+table.dtable tr {
+	background: #FAFAFA;
+}
+
+table.dtable tr.inactive {
+	background: #FAF0F0;
+}
+
+table.dtable tr:hover {
+	/*background: #4465A0;*/
+	background: #e0eac0;
+	color: #000;
+}
+
+table.dtable tr:hover a {
+	/*color: #FAF0F0;*/
+	color: #000;
+}
+
+table.dtable tr th {
+	/*background: #22437f;*/
+	background: #000;
+	color: #FFFFFF;
+	border-bottom: 1px solid #000000;
+	text-align: left;
+	padding: 4px;
+}
+
+table.dtable tr td {
+	padding: 4px;
+}
+
+div.error {
+	color: #FF0000;
+	font-size: 8pt;
+	font-family: sans-serif;
+	position: absolute;
+}
+
+div.error_rel {
+	color: #FF0000;
+	font-size: 8pt;
+	font-family: sans-serif;
+}
+
+div.errorbox {
+	font-family: sans-serif;
+	padding: 10px;
+	background-color: red;
+	color: white;
+	font-weight: bold;
+	border: 1px solid black;
+}
+
+div.errorbox a {
+	color: #000000;
+}
+
