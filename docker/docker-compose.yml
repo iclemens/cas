@@ -1,0 +1,37 @@
+version: '3'
+services:
+  apache:
+    build:
+      context:
+        ./cas
+    ports:
+      - 80:80
+    volumes:
+      - ../src/shared/htdocs:/var/www/html
+      - ../src/shared:/opt/cas/shared
+      - ../src/default:/opt/cas/default
+    env_file:
+      - cas.env
+    environment:
+      DATABASE_TYPE: "pdo_mysql"
+      DATABASE_HOST: "mariadb"
+      DATABASE_NAME: "cas"
+      DATABASE_USER: "cas"
+      DATABASE_PASSWORD: "6rHx7UQvA2w8sEFn"
+    links:
+      - 'mariadb'
+
+  mariadb:
+    image: mariadb:10.4
+    volumes:
+      - mariadb:/var/lib/mysql
+    environment:
+      TZ: "UTC"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+      MYSQL_ROOT_PASSWORD: "Bnw7euSZGsYZBaSJ"
+      MYSQL_USER: "cas"
+      MYSQL_PASSWORD: "6rHx7UQvA2w8sEFn"
+      MYSQL_DATABASE: "cas"
+
+volumes:
+  mariadb:
