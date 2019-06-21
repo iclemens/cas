@@ -3,10 +3,10 @@
 	{
 		static function registerPlugin(&$smarty)
 		{
-			$smarty->register_block('paged_table', 'CT_Smarty_Paginate::smartyPagedTable');
-			$smarty->register_block('table_header', 'CT_Smarty_Paginate::smartyTableHeader');
-			$smarty->register_function('sortable_column', 'CT_Smarty_Paginate::smartySortableColumn');
-			$smarty->register_function('filter_params', 'CT_Smarty_Paginate::smartyFilterParams');
+			$smarty->registerPlugin('block', 'paged_table', 'CT_Smarty_Paginate::smartyPagedTable');
+			$smarty->registerPlugin('block', 'table_header', 'CT_Smarty_Paginate::smartyTableHeader');
+			$smarty->registerPlugin('function', 'sortable_column', 'CT_Smarty_Paginate::smartySortableColumn');
+			$smarty->registerPlugin('function', 'filter_params', 'CT_Smarty_Paginate::smartyFilterParams');
 		}
 
 		static function smartyFilterParams($params, &$smarty)
@@ -81,9 +81,9 @@
 		* Note that this helper only provides the table columns, the user
 		* should make sure the respective row is also present.
 		*/
-		static function smartySortableColumn($params, &$smarty)
+		static function smartySortableColumn($params, $template)
 		{
-			foreach($smarty->_tag_stack as &$tag) {
+			foreach($template->smarty->_tag_stack as &$tag) {
 				if($tag[0] == 'paged_table') {
 					$tag_params = &$tag[1];
 					

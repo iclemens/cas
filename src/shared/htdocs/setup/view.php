@@ -141,10 +141,10 @@ in het readme.html bestand.</p>
 <input type="hidden" name="setup_step" value="4" />
 
 Gebruikersnaam:<br />
-<input type="text" name="creator_username" /><br />
+<input type="text" name="creator_username" value="<?php echo($config->database->username); ?>" /><br />
 <br />
 Wachtwoord:<br />
-<input type="password" name="creator_password" /><br />
+<input type="password" name="creator_password" value="<?php echo($config->database->password); ?>" /><br />
 <br />
 
 <input type="submit" value="Maak tabellen" />

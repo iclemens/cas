@@ -153,7 +153,7 @@
 
 			/* Display form */
 			$this->_smarty->assign('emailtemplate', $emailtemplate);
-			$this->_smarty->assign_by_ref('errors', $errors);
+			$this->_smarty->assignByRef('errors', $errors);
 	
 			$this->getResponse()->appendBody(
 				$this->_smarty->fetch('emailtemplate/nieuw.tpl'));
@@ -205,7 +205,7 @@
 			$emailtemplate['volgnummer'] = $id;
 
 			$this->_smarty->assign('emailtemplate', $emailtemplate);
-			$this->_smarty->assign_by_ref('errors', $errors);
+			$this->_smarty->assignByRef('errors', $errors);
 	
 			$this->getResponse()->appendBody(
 				$this->_smarty->fetch('emailtemplate/bewerk.tpl'));

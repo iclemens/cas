@@ -345,7 +345,7 @@
 				return $location;
 		}
 
-		$suggestedPath = realpath($globalDataPath . '/library/Smarty');
+		$suggestedPath = realpath($globalDataPath) . '/library/Smarty';
 
 		throw new Exception('Kan "smarty" niet vinden, plaats smarty in de volgende directory op de webserver: ' . $suggestedPath);
 	}
@@ -388,7 +388,7 @@
 	 * @prijs De prijs in centen
 	 * @return De prijs met euroteken en komma
 	 */
-	function fmt_prijs($params, &$smarty) {
+	function fmt_prijs($params) {
 		$s_prijs = '';
 		$sign = '';
 		$prijs = round($params['prijs']);
@@ -425,8 +425,12 @@
 			return "\xe2\x82\xac " . $sign . $s_prijs;
 	}
 
-	function fmt_klantnaam($params, &$smarty) {
+	function fmt_klantnaam($params) {
 		$klant = $params['klant'];
+
+		if(!is_array($params['klant'])) {
+			return 'Ongeldige klantnaam';
+		}
 
 		if($klant['klanttype'] == 0)
 			$out .= $klant['bedrijfsnaam'] . ', ';

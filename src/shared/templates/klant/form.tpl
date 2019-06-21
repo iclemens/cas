@@ -175,11 +175,11 @@
 			<br /><br />
 
 			Plaats:<br />
-			{html_textbox field=bezoekplaats value=$klant.bezoekplaats' errors=$errors}
+			{html_textbox field=bezoekplaats value=$klant.bezoekplaats errors=$errors}
 			<br /><br />
 
 			Land:<br />
-			{html_textbox field=bezoekland value=$klant.bezoekland' errors=$errors}
+			{html_textbox field=bezoekland value=$klant.bezoekland errors=$errors}
 			<br /><br />
 
 			<br />

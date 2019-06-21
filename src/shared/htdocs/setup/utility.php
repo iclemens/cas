@@ -22,7 +22,7 @@
 
 		// Check database
 		require_once($globalDataPath . '/library/initialization.php');
-		
+
 		try {
 			initializeEnvironment();
 		} catch(CT_Exception_Database $e) { // Database not properly setup

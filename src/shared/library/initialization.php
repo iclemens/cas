@@ -238,7 +238,6 @@
 			Zend_Registry::set('database', $database);
 			Zend_Db_Table::setDefaultAdapter($database);
 		} catch(Exception $e) {
-
 			$logger = Zend_Registry::get('logger');
 			$logger->log('[Initializatie] : ' . $e->getMessage(), Zend_Log::CRIT);
 

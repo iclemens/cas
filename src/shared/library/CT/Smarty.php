@@ -38,13 +38,15 @@
 			$this->_formatter = $formatter;
 
 			parent::__construct();
-			
-			require_once $this->_get_plugin_filepath('function', 'eval');
-			
-			$this->register_resource('cas', array(
-				'CT_Smarty_Resource', 
-				'cas_get_template', 'cas_get_timestamp',
-				'cas_get_secure', 'cas_get_trusted'));
+
+			foreach($this->getpluginsdir($this) as $value) {
+				$filepath = $value . "/function.eval.php";
+				if (file_exists($filepath)) {
+					require_once $filepath;
+				}
+			}
+
+			$this->registerResource('cas', new CT_Smarty_Resource());
 
 			$this->default_resource_type = 'cas';
 
@@ -63,22 +65,22 @@
 			$this->assign('use_icons', 0);
 
 			// Custom smarty functions
-			$this->register_function('html_global_error', array($this, 'html_global_error'));
+			$this->registerPlugin('function', 'html_global_error', array($this, 'html_global_error'));
 
 			// Form related functions
-			$this->register_function('html_textbox', array($this, 'html_textbox'));
-			$this->register_function('html_file_upload', array($this, 'html_file_upload'));
-			$this->register_function('html_error_for_field', array($this, 'html_error_for_field'));
+			$this->registerPlugin('function', 'html_textbox', array($this, 'html_textbox'));
+			$this->registerPlugin('function', 'html_file_upload', array($this, 'html_file_upload'));
+			$this->registerPlugin('function', 'html_error_for_field', array($this, 'html_error_for_field'));
 
-			$this->register_function('klantnaam', 'fmt_klantnaam');
+			$this->registerPlugin('function', 'klantnaam', 'fmt_klantnaam');
 
-			$this->register_function('maand', array($this, 'maand_nummer_naar_tekst'));
+			$this->registerPlugin('function', 'maand', array($this, 'maand_nummer_naar_tekst'));
 
-			$this->register_function('factuurnummer', array($this, 'maak_factuurnummer'));
-			$this->register_function('klantnummer', array($this, 'maak_klantnummer'));
-			$this->register_function('prijs', 'fmt_prijs');
+			$this->registerPlugin('function', 'factuurnummer', array($this, 'maak_factuurnummer'));
+			$this->registerPlugin('function', 'klantnummer', array($this, 'maak_klantnummer'));
+			$this->registerPlugin('function', 'prijs', 'fmt_prijs');
 
-			$this->register_modifier('escapexml', array($this, 'escapeXML'));
+			$this->registerPlugin('modifier', 'escapexml', array($this, 'escapeXML'));
 		}
 
 		/**
@@ -157,7 +159,7 @@
 			return out;
 		}
 
-		function html_textbox($params, &$smarty) 
+		function html_textbox($params) 
 		{
 			$field = $params['field'];
 			$value = $params['value'];
@@ -177,7 +179,7 @@
 			return $out;
 		}
 
-		function html_error_for_field($params, &$smarty)
+		function html_error_for_field($params)
 		{
 			$field = $params['field'];
 			$errors = $params['errors'];
@@ -197,7 +199,7 @@
 			return $out;
 		}
 
-		function html_global_error($params, &$smarty)
+		function html_global_error($params)
 		{
 			$errors = $params['errors'];
 			$class = "errorbox";
@@ -220,7 +222,7 @@
 			return $out;
 		}
 
-		function maand_nummer_naar_tekst($params, &$smarty)
+		function maand_nummer_naar_tekst($params)
 		{
 			if(!array_key_exists('type', $params)) {
 				$params['type'] = 'full';
@@ -252,12 +254,12 @@
 			return($maanden[intval($params['nr']) - 1]);
 		}
 
-		function maak_factuurnummer($params, &$smarty)
+		function maak_factuurnummer($params)
 		{
 			return $this->_formatter->getInvoiceRef($params["factuur"]);
 		}
 
-		function maak_klantnummer($params, &$smarty)
+		function maak_klantnummer($params)
 		{
 			return $this->_formatter->getCustomerRef($params);
 		}

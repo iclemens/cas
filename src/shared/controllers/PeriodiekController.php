@@ -302,7 +302,7 @@
 
 				$this->_smarty->assign("btw_tarieven", CT_VAT::getVATCategories());
 
-				$this->_smarty->assign_by_ref('errors', $errors);
+				$this->_smarty->assignByRef('errors', $errors);
 
 				$this->_smarty->assign('maanden', 
 					$this->periodenToMonths($periodiekeregels[0]['perioden']));

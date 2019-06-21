@@ -7,7 +7,7 @@
 	 * @package    boekhouding
 	 */
 
-	class CT_Smarty_Resource {
+	class CT_Smarty_Resource extends Smarty_Resource_Custom {
 
 		/**
 		 * Returns the template source of the $name resource.
@@ -18,7 +18,7 @@
 		 *
 		 * @return bool True on success, false otherwise
 		 */
-		static function cas_get_template($name, &$source, &$smarty)
+		protected function fetch($name, &$source, &$mtime)
 		{
 			try {
 				$config = Zend_Registry::get('config');
@@ -41,7 +41,7 @@
 		 *
 		 * @return bool True on success, false otherwise
 		 */
-		static function cas_get_timestamp($name, &$timestamp, &$smarty)
+		protected function fetchTimestamp($name)
 		{
 			try {
 				$config = Zend_Registry::get('config');
@@ -53,15 +53,6 @@
 			} catch(Exception $e) {
 				return false;
 			}
-		}
-
-		static function cas_get_secure($name, &$smarty)
-		{
-			return true;
-		}
-
-		static function cas_get_trusted($name, &$smarty)
-		{
 		}
 	}
 

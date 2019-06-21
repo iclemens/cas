@@ -65,36 +65,37 @@
 		 * Laat een voorbeeld van de factuur zien, maar maakt hem nog niet. 
 		 */
 		public function voorbeeldAction()
-		{
+		{			
 			$this->requireUserType(array(CT_User::Directie));
 
 			$tbl_klanten = new CT_Db_Klanten();
-
+			
 			$factuur = $this->leesFactuurUitArray($_POST);
 			$btw_categorie = $_POST['btw_categorie'];
-
+			
 			/* Make sure all fields are correctly filled in */
 			$errors = new CT_Validation_Errors();
 			$validator = new CT_Validation_Validator_Factuur();
 			$validator->validate($factuur, $errors);
-
+			
 			/* Display error page, or show preview */
 			if($errors->hasErrors()) {
 				$this->displayInvoiceEditor($factuur, $btw_categorie, $errors);
-			} else {
+			} else {				
 				$factuur = CT_Db_Facturen::addCalculatedFields($factuur);
-
+				
 				$klanten   = $tbl_klanten->find($factuur['klantnummer'])->toArray();
 				$klant = $klanten[0];
 
 				$mail_body = wrapMultiline($this->generateEmail($klant, $factuur), 75);
-
+				
 				$this->_smarty->assign('mail_body', $mail_body);
 
 				$factuur['datum'] = date('d/m/Y', strtotime($factuur['datum']));
+				
 				$this->_smarty->assign('factuur', $factuur);
 				$this->_smarty->assign('btw_categorie', $btw_categorie);
-
+				
 				$this->getResponse()->appendBody(
 					$this->_smarty->fetch("factuur/voorbeeld.tpl"));
 			}
@@ -478,7 +479,7 @@
 			$this->_smarty->assign("factuur", $factuur);
 			$this->_smarty->assign("btw_categorie", $btw_categorie);
 			$this->_smarty->assign("btw_tarieven", CT_VAT::getVATCategories());
-			$this->_smarty->assign_by_ref("errors", $errors);
+			$this->_smarty->assignByRef("errors", $errors);
 
 			if(array_key_exists('klantnummer', $factuur) && $factuur['klantnummer'] > 0) {
 				$tbl_klanten = new CT_Db_Klanten();

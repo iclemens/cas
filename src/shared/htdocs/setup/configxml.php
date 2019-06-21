@@ -22,6 +22,8 @@
 	function formField($name, $options) {		
 		if(array_key_exists('value', $options))
 			$value = $options['value'];
+		elseif(array_key_exists('environment', $options) && getenv($options['environment']))
+			$value = getenv($options['environment']);
 		elseif(array_key_exists('default', $options))
 			$value = $options['default'];
 		else
@@ -222,21 +224,21 @@
 			),
 				
 			"branding" => array(
-				"application_name" => array("type" => "text", "default" => "Project CAS"),
-				"application_abbr" => array("type" => "text", "default" => "CAS"),
-				"company_name" => array("type" => "text"),
-				"company_email" => array("type" => "text"),
-				"company_telephone" => array("type" => "text"),
+				"application_name" => array("type" => "text", "default" => "Project CAS", "environment" => "APPLICATION_NAME"),
+				"application_abbr" => array("type" => "text", "default" => "CAS", "environment" => "APPLICATION_ABBR"),
+				"company_name" => array("type" => "text", "environment" => "COMPANY_NAME"),
+				"company_email" => array("type" => "text", "environment" => "COMPANY_EMAIL"),
+				"company_telephone" => array("type" => "text", "environment" => "COMPANY_TELEPHONE"),
 				"default_stylesheet" => array("type" => "list", "options" => $cssOptions),
 				"formatter" => array("type" => "list", "options" => $formattingOptions)
 			),
 			
 			"database" => array(
-				"type" => array("type" => "list", "options" => $pdoOptions, "default" => "pdo_mysql"),
-				"host" => array("type" => "text", "default" => "localhost"),
-				"username" => array("type" => "text", "default" => "projectcas"),
-				"password" => array("type" => "password"),
-				"name" => array("type" => "text", "default" => "projectcas")
+				"type" => array("type" => "list", "options" => $pdoOptions, "default" => "pdo_mysql", "environment" => "DATABASE_TYPE"),
+				"host" => array("type" => "text", "default" => "localhost", "environment" => "DATABASE_HOST"),
+				"username" => array("type" => "text", "default" => "projectcas", "environment" => "DATABASE_USER"),
+				"password" => array("type" => "password", "environment" => "DATABASE_PASSWORD"),
+				"name" => array("type" => "text", "default" => "projectcas", "environment" => "DATABASE_NAME")
 			),
 			
 			"mailer" => array(

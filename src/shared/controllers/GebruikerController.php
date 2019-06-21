@@ -127,7 +127,7 @@
 			/* Display error page, or insert user */
 			if($errors->hasErrors()) {
 				$this->_smarty->assign("gebruiker", $gebruiker);
-				$this->_smarty->assign_by_ref("errors", $errors);
+				$this->_smarty->assignByRef("errors", $errors);
 				$this->_smarty->display('gebruiker/nieuw.tpl');				
 			} else {
 				$table = new CT_Db_Gebruikers();
@@ -167,7 +167,7 @@
 			/* Display error page, or update user */
 			if($errors->hasErrors()) {
 				$this->_smarty->assign("gebruiker", $gebruiker);
-				$this->_smarty->assign_by_ref("errors", $errors);
+				$this->_smarty->assignByRef("errors", $errors);
 				$this->_smarty->display("gebruiker/bewerk.tpl");
 			} else {
 				/* Only update the password if it's correctly filled in */ 		

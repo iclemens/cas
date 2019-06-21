@@ -1,4 +1,4 @@
 <?php
-$dataPath = "/home/ivar/Development/cas/trunk/generic";
-$globalDataPath = "/home/ivar/Development/cas/trunk/shared";
+$dataPath = "/opt/cas/default";
+$globalDataPath = "/opt/cas/shared";
 $configType = "production";

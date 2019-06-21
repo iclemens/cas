@@ -177,7 +177,7 @@
 			/* Display error page, or create customer + user */
 			if($errors->hasErrors()) {
 				$this->_smarty->assign('klant', $klant);
-				$this->_smarty->assign_by_ref('errors', $errors);
+				$this->_smarty->assignByRef('errors', $errors);
 	
 				$this->_smarty->assign('btw_tarieven', CT_VAT::getVATCategories());
 				$this->_smarty->assign("emailtemplates", CT_Db_Emailtemplates::lijstMetTemplates());
@@ -224,7 +224,7 @@
 			if($errors->hasErrors()) {
 				$klant['klantnummer'] = intval($this->_getParam('id'));
 				$this->_smarty->assign("klant", $klant);
-				$this->_smarty->assign_by_ref("errors", $errors);
+				$this->_smarty->assignByRef("errors", $errors);
 
 				$this->_smarty->assign('btw_tarieven', CT_VAT::getVATCategories());
 				$this->_smarty->assign("emailtemplates", CT_Db_Emailtemplates::lijstMetTemplates());
@@ -298,7 +298,6 @@
 			$this->_smarty->assign("partial", $partial);
 
 			try {
-
 				$table = new CT_Db_Klanten();
 				$db    = $table->getAdapter();
 				$where = $db->quoteInto('klantnummer LIKE ?', $partial . '%') . ' OR ' . 
@@ -352,9 +351,9 @@
 
 			foreach($fields_chk as $field) {
 				if(array_key_exists($field, $bron) && strlen($bron[$field]) > 0)
-					$klant[$field] = true;
+					$klant[$field] = 1;
 				else
-					$klant[$field] = false;
+					$klant[$field] = 0;
 			}
 
 			return $klant;

@@ -171,7 +171,7 @@
 		 */
 		private function displayFacturerenEditor($factureren, &$errors)
 		{
-			$this->_smarty->assign_by_ref("errors", $errors);
+			$this->_smarty->assignByRef("errors", $errors);
 			$this->_smarty->assign("factureren", $factureren);
 
 			$this->getResponse()->appendBody(

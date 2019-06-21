@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <klant nummer="{$klant.klantnummer}" actief="{if $klant.actief == 0}false{else}true{/if}" type="{if $klant.klanttype == 0}zakelijk{else}particulier{/if}">
 
-	<naam>{klantnaam klant=$klant|escapexml}</naam>
+	<naam>{{klantnaam klant=$klant}|escapexml}</naam>
 
 	<bedrijfsnaam>{$klant.bedrijfsnaam|escapexml}</bedrijfsnaam>
 	<afdeling>{$klant.afdeling|escapexml}</afdeling>

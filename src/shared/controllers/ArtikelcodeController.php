@@ -153,7 +153,7 @@
 
 			/* Display form */
 			$this->_smarty->assign('artikelcode', $artikelcode);
-			$this->_smarty->assign_by_ref('errors', $errors);
+			$this->_smarty->assignByRef('errors', $errors);
 	
 			$this->getResponse()->appendBody(
 				$this->_smarty->fetch('artikelcode/nieuw.tpl'));
@@ -203,7 +203,7 @@
 			$artikelcode['artikelcode'] = $code;
 
 			$this->_smarty->assign('artikelcode', $artikelcode);
-			$this->_smarty->assign_by_ref('errors', $errors);
+			$this->_smarty->assignByRef('errors', $errors);
 	
 			$this->getResponse()->appendBody(
 				$this->_smarty->fetch('artikelcode/bewerk.tpl'));

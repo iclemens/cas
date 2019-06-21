@@ -4,7 +4,10 @@
 	
 	$currentStep = determineSetupPhase();
 	$errorMessage = '';
-		
+
+	/**
+	 * Select for which company to install CAS
+	 */
 	if($currentStep == 1) {
 
 		require_once('setup/config.php');
@@ -30,6 +33,9 @@
 		require_once($globalDataPath . '/library/utility.php');		
 	}
 	
+	/**
+	 * Configure XML
+	 */
 	if($currentStep == 2) {
 		require_once('setup/configxml.php');
 		
@@ -61,12 +67,15 @@
 		}
 	}
 
+	/**
+	 * Database creation
+	 */
 	if($currentStep == 3) {		
 		Zend_Loader::loadClass('CT_Initialize');
 
 		$config = Zend_Registry::get('config');
 		$initialization = CT_Initialize::factory($config->database->type);
-		
+
 		if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['setup_step'] == '3') {
 			try {
 				$initialization->createDatabase($_POST);		
@@ -82,6 +91,9 @@
 		}
 	}
 
+	/**
+	 * Table creation
+	 */
 	if($currentStep == 4) {
 		Zend_Loader::loadClass('CT_Initialize');
 
@@ -90,7 +102,7 @@
 		
 		if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['setup_step'] == '4') {
 			try {
-				$initialization->createTables($_POST);		
+				$initialization->createTables($_POST);
 				$currentStep = determineSetupPhase();
 			} catch(Exception $e) {
 				$errorMessage = $e->getMessage();

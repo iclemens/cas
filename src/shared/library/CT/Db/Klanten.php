@@ -41,8 +41,6 @@
 			$db = $this->getAdapter();
 			$config = Zend_Registry::get('config');
 
-
-
 			if($klant_type == 0) {
 				$type_min = intval($config->customer->first_business_id);
 				$type_max = intval($config->customer->first_private_id) - 1;
