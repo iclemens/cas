@@ -1,0 +1,5 @@
+.svn
+config.xml
+src/shared/library/Zend
+src/shared/library/Smarty
+src/*/tmp
