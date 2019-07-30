@@ -191,12 +191,14 @@
 				$tbl_regels = new CT_Db_Factuurregels();
 
 				try {
+					$factuur['incasso'] = 0;
 					$factuur['datum'] = date('Y/m/d', strtotime($factuur['datum']));
-					$factuur['uiterstedatum'] = date('Y/m/d/',
+					$factuur['uiterstedatum'] = date('Y/m/d',
 						strtotime($factuur['datum']) + 60 * 60 * 24 * $config->invoice->payment_due_delta);
 
 					$factuurvolgnummer = $tbl_facturen->insert($factuur);
 				} catch(Exception $e) {
+					echo($e->getMessage());
 					/* User visible error message... */
 					$errors->reject("Er is een fout opgetreden tijdens de database transactie. Transactie is teruggedraaid.");
 
@@ -210,7 +212,7 @@
 
 				/* TODO: We rely on emailPDF to generate a cached version.
 						Should make the cache generation more explicit */
-
+				echo('whoot');
 				//$pdf = $this->retreivePDF($factuurvolgnummer);
 				$this->emailPDF($factuurvolgnummer);
 
